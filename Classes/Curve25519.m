@@ -138,7 +138,7 @@ extern int  curve25519_sign(unsigned char* signature_out, /* 64 bytes */
         return nil;
     }
     
-    curve25519_donna(sharedSecret,key, [theirPublicKey bytes]);
+    curve25519_donna(sharedSecret,[key bytes], [theirPublicKey bytes]);
     
     NSData *sharedSecretData = [NSData dataWithBytes:sharedSecret length:32];
     

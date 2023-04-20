@@ -17,4 +17,6 @@ Pod::Spec.new do |spec|
   spec.framework    = 'Security'
   spec.public_header_files = "Classes/*.h"
   spec.requires_arc = true
+  spec.ios.deployment_target  = '12.0'
+  spec.osx.deployment_target  = '11.10'
 end
