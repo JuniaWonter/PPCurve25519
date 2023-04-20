@@ -16,6 +16,7 @@
 }
 
 -(NSData*) publicKey;
+-(NSData*) privateKey;
 
 @end
 
@@ -31,6 +32,7 @@
  */
 
 + (NSData*)generateSharedSecretFromPublicKey:(NSData*)theirPublicKey andKeyPair:(ECKeyPair*)keyPair;
++ (NSData*)generateSharedSecretFromPublicKey:(NSData*)theirPublicKey andKey:(NSData*)key;
 
 /**
  *  Generate a curve25519 key pair

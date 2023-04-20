@@ -72,6 +72,9 @@ extern int  curve25519_sign(unsigned char* signature_out, /* 64 bytes */
 -(NSData*) publicKey {
     return [NSData dataWithBytes:self->publicKey length:32];
 }
+-(NSData*) privateKey {
+    return [NSData dataWithBytes:self->privateKey length:32];
+}
 
 -(NSData*) sign:(NSData*)data{
     Byte signatureBuffer[ECCSignatureLength];
@@ -121,4 +124,26 @@ extern int  curve25519_sign(unsigned char* signature_out, /* 64 bytes */
     return [keyPair generateSharedSecretFromPublicKey:theirPublicKey];
 }
 
++ (NSData*)generateSharedSecretFromPublicKey:(NSData*)theirPublicKey andKey:(NSData*)key {
+    unsigned char *sharedSecret = NULL;
+    
+    if ([theirPublicKey length] != 32) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"The supplied public key does not contain 32 bytes" userInfo:nil];
+    }
+    
+    sharedSecret = malloc(32);
+    
+    if (sharedSecret == NULL) {
+        free(sharedSecret);
+        return nil;
+    }
+    
+    curve25519_donna(sharedSecret,key, [theirPublicKey bytes]);
+    
+    NSData *sharedSecretData = [NSData dataWithBytes:sharedSecret length:32];
+    
+    free(sharedSecret);
+    
+    return sharedSecretData;
+}
 @end
