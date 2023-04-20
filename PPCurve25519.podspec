@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #spec.private_header_files = 'Sources/ed25519/nacl_includes/*.h','Sources/ed25519/additions/*.h', 'Sources/ed25519/nacl_sha512/*.h'
   spec.framework    = 'Security'
   spec.public_header_files = "Classes/*.h"
-  spec.requires_arc = true
+  spec.requires_arc = false
   spec.ios.deployment_target  = '12.0'
   spec.osx.deployment_target  = '11.10'
 end
